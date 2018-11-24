@@ -19,7 +19,7 @@ lyrics_10000 = lyrics.iloc[:10000].copy()
 # define the schema
 schema = Schema(title=TEXT(stored=True),
                 artist=TEXT(stored=True),
-                lyrics=KEYWORD(stored=True))
+                lyrics=TEXT(stored=True))
 
 # create the index
 inv_index = create_in('index', schema)
