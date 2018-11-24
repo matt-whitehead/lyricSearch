@@ -11,5 +11,5 @@ A vertical search engine for song lyrics. Final project for SI 650: Information 
 # TODO
 * Index remaining documents.
 * Create n-gram model so queries are sensitive to the sequence of lyrics.
-* Create UI
-* Add advanced search and API integrations
+* Create UI.
+* Add advanced search and API integrations.
