@@ -3,6 +3,8 @@ A vertical search engine for song lyrics. Final project for SI 650: Information 
 # Installation
 * Clone the repository 
 * Run ``pip install -r requirements.txt`` in the project directory.
+* Run ``mkdir index`` in the project directory.
+* Run ``python create_index.py`` in the project directory.
 # Usage
 * Run ``python main.py`` in the project directory.
 * Type in your query and push enter.
