@@ -3,6 +3,7 @@ A vertical search engine for song lyrics. Final project for SI 650: Information 
 # Installation
 * Clone the repository 
 * Run ``pip install -r requirements.txt`` in the project directory.
+* Download "lyrics.csv" from [Kaggle](https://www.kaggle.com/gyani95/380000-lyrics-from-metrolyrics).
 * Run ``mkdir index`` in the project directory.
 * Run ``python create_index.py`` in the project directory.
 # Usage
