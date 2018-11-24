@@ -9,7 +9,7 @@ A vertical search engine for song lyrics. Final project for SI 650: Information 
 # Usage
 * Run ``python main.py`` in the project directory.
 * Type in your query and push enter.
-* Results are limited to 10 for each query.
+* Results are limited to 10 at the moment.
 * NOTE: This is a work in progress. The final product will have a UI and advanced features.
 # TODO
 * Index remaining documents.
