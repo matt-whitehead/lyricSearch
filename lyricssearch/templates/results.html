@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <title>LyricSearch: Finding Your Own Songs</title>
+        <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/skeleton.css') }}">
+        <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/normalize.css') }}">
+        <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/customize.css') }}">
+    </head>
+    <body>
+        <div class="form-group">
+            <form action="search">
+                <a href="/" class="logo"> LyricSearch </a>
+                <input type="text" class="searchBox" name="q" value="{{q}}">
+                <input class="button" type="submit">
+            </form>
+        </div>
+
+        {% if title|length == 0 %}
+            <div class="error">{{"Search not found! Try to use other keywords."}}</div>
+        {% else %}
+            {% for i in range(title|length) %}
+                <div class="wrapper">
+                      <div class="title" id="panel">{{title[i]}}</div>
+                      <div class="score" id="panel">{{"Similarity Score: "}}</div>
+                      <div class="artist" id="panel">{{"Artist: " + artist[i]}}</div>
+                      <div class="lyrics" id="panel">{{lyrics[i]}}</div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <footer>
+            <h class="footerLogo"> LyricSearch </h>
+            <p class="credit">Developed by: Daming Gao, Matthew Whitehead   &#169 2018</p>
+        </footer>
+    </body>
+</html>
