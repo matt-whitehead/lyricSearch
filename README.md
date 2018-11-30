@@ -12,7 +12,7 @@ A vertical search engine for song lyrics. Final project for SI 650: Information 
 * Run ``FLASK_DEBUG=1 FLASK_APP=main.py flask run`` in the project directory. 
 * Results are limited to 10 at the moment.
 * Then, you can go to [http://127.0.0.1:5000/] to see the search engine in action. 
-* **NOTE**: This is a work in progress. The final product will advanced features such as API integrations.
+* **NOTE**: This is a work in progress. The final product will have advanced features such as API integrations.
 # TODO
 * Index remaining documents.
 * Create n-gram model so queries are sensitive to the sequence of lyrics.
