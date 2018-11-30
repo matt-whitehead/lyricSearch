@@ -1,3 +1,4 @@
 lyrics.csv
 __pycache__/
 .idea
+*.ipynb
