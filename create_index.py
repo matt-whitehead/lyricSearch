@@ -13,6 +13,13 @@ lyrics = lyrics[lyrics['is_nan'] == False]
 lyrics = lyrics[['lyrics', 'song', 'artist']]
 lyrics.reset_index(drop=True, inplace=True)
 
+# clean the artist names and song names
+lyrics['artist'] = lyrics['artist'] \
+.apply(lambda x: ' '.join(x.split('-')).title())
+
+lyrics['song'] = lyrics['song'].astype('str') \
+.apply(lambda x: ' '.join(x.split('-')).title())
+
 # only index the first 10,000 documents for prototyping purposes
 lyrics_10000 = lyrics.iloc[:10000].copy()
 
