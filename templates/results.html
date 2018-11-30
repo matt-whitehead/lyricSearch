@@ -20,11 +20,13 @@
         {% if title|length == 0 %}
             <div class="error">{{"Search not found! Try to use other keywords."}}</div>
         {% else %}
+            <div>{{genre_counts}}</div>
             {% for i in range(title|length) %}
                 <div class="wrapper">
                       <div class="title" id="panel">{{title[i]}}</div>
                       <div class="score" id="panel">{{"Similarity Score: "}}</div>
                       <div class="artist" id="panel">{{"Artist: " + artist[i]}}</div>
+                      <div class="artist" id="panel">{{"Genre: " + genre[i]}}</div>
                       <div class="lyrics" id="panel">{{lyrics[i]}}</div>
                 </div>
             {% endfor %}
