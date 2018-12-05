@@ -11,6 +11,7 @@ app = Flask(__name__)
 def generate_result(query):
     # parse the query and search 'lyrics' field
     parser = QueryParser('lyrics', ix.schema)
+    query = '"' + query + '"'
     parsed = parser.parse(query)
 
     # initialize lists for the results
