@@ -11,8 +11,9 @@ app = Flask(__name__)
 def generate_result(query):
     # parse the query and search 'lyrics' field
     parser = QueryParser('lyrics', ix.schema)
-    query = '"' + query + '"'
-    parsed = parser.parse(query)
+    phrase_query = '"' + query + '"'
+    parsed = parser.parse(phrase_query)
+    raw_parsed = parser.parse(query)
 
     # initialize lists for the results
     title = []
@@ -23,10 +24,10 @@ def generate_result(query):
     # open a searcher object
     with ix.searcher() as searcher:
         # attempt to correct the query
-        corrected = searcher.correct_query(parsed, query)
+        corrected = searcher.correct_query(raw_parsed, query)
         results = searcher.search(parsed)
         # if the corrected query isn't the same as the original query...
-        if corrected.query != parsed:
+        if corrected.query != raw_parsed:
             modified_query = corrected.string
             modified_query = Markup('<a href=' + url_for('search', q=modified_query) + '>' + corrected.string + '</a>')
         else:
