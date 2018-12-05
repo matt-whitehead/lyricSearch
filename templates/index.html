@@ -15,6 +15,11 @@
           <form action="search">
               <h2 class="logo"> LyricSearch </h2>
               <h1 class="slogan"> Finding Your Own Songs </h1>
+              <select name='t'>
+                <option value="lyrics">lyrics</option>
+                <option value="artist">artist</option>
+                <option value="title">title</option>
+              </select>
               <input type="text" class="searchBox" name="q" value="{{q}}">
               <input class="button" type="submit", value="Search">
           </form>

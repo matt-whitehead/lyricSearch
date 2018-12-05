@@ -8,12 +8,23 @@ ix = open_dir('index')
 app = Flask(__name__)
 
 
-def generate_result(query):
+def generate_result(query, search_type):
     # parse the query and search 'lyrics' field
-    parser = QueryParser('lyrics', ix.schema)
-    phrase_query = '"' + query + '"'
-    parsed = parser.parse(phrase_query)
-    raw_parsed = parser.parse(query)
+    if search_type == 'lyrics':
+        parser = QueryParser('lyrics', ix.schema)
+        phrase_query = '"' + query + '"'
+        parsed = parser.parse(phrase_query)
+        raw_parsed = parser.parse(query)
+    elif search_type == 'artist':
+        parser = QueryParser('artist', ix.schema)
+        parsed = parser.parse(query)
+        raw_parsed = parsed
+    elif search_type == 'title':
+        parser = QueryParser('title', ix.schema)
+        parsed = parser.parse(query)
+        raw_parsed = parsed
+    else:
+        raise ValueError('Invalid Search Type: ' + search_type)
 
     # initialize lists for the results
     title = []
@@ -29,7 +40,7 @@ def generate_result(query):
         # if the corrected query isn't the same as the original query...
         if corrected.query != raw_parsed:
             modified_query = corrected.string
-            modified_query = Markup('<a href=' + url_for('search', q=modified_query) + '>' + corrected.string + '</a>')
+            modified_query = Markup('<a href=' + url_for('search', t=search_type, q=modified_query) + '>' + corrected.string + '</a>')
         else:
             modified_query = None
         # process the results and put them into the lists
@@ -54,8 +65,9 @@ def root():
 def search():
     # collect and parse the query
     q = request.args['q']
-    title, artist, lyrics, genre, genre_counts, modified_query = generate_result(q)
+    t = request.args['t']
+    title, artist, lyrics, genre, genre_counts, modified_query = generate_result(q, t)
 
     return render_template("results.html", q=q, title=title,
                            artist=artist, lyrics=lyrics, genre=genre,
-                           genre_counts=genre_counts, modified_query=modified_query)
+                           genre_counts=genre_counts, modified_query=modified_query, t=t)

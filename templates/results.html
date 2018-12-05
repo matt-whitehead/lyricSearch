@@ -12,6 +12,23 @@
         <div class="form-group">
             <form action="search">
                 <a href="/" class="logo"> LyricSearch </a>
+                <select name="t">
+                    {% if t == "lyrics" %}
+                    <option value='lyrics' selected="selected">lyrics</option>
+                    <option value='artist'>artist</option>
+                    <option value='title'>title</option>
+                    {% endif %}
+                    {% if t == "artist" %}
+                    <option value='lyrics'>lyrics</option>
+                    <option value='artist' selected="selected">artist</option>
+                    <option value='title'>title</option>
+                    {% endif %}
+                    {% if t == "title" %}
+                    <option value='lyrics'>lyrics</option>
+                    <option value='artist'>artist</option>
+                    <option value='title' selected="selected">title</option>
+                    {% endif %}
+                </select>
                 <input type="text" class="searchBox" name="q" value="{{q}}">
                 <input class="button" type="submit", value="Search">
             </form>
