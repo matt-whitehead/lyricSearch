@@ -13,10 +13,12 @@
             <form action="search">
                 <a href="/" class="logo"> LyricSearch </a>
                 <input type="text" class="searchBox" name="q" value="{{q}}">
-                <input class="button" type="submit">
+                <input class="button" type="submit", value="Search">
             </form>
         </div>
-
+        {% if modified_query is not none %}
+            <div class="error">{{"Did you mean..." +  modified_query + "?"}}</div>
+        {% endif %}
         {% if title|length == 0 %}
             <div class="error">{{"Search not found! Try to use other keywords."}}</div>
         {% else %}
