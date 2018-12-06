@@ -7,6 +7,7 @@
         <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/normalize.css') }}">
         <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/customize.css') }}">
+        <script src={{ url_for('static', filename='js/mark.min.js') }}></script>
     </head>
     <body>
         <div class="form-group">
@@ -50,7 +51,11 @@
                 </div>
             {% endfor %}
         {% endif %}
-
+        <script>
+            let instance = new Mark(document.querySelector('body'));
+            let options = {'accuracy': 'partially', 'exclude': ['.title']}
+            instance.mark(document.getElementsByClassName('searchBox')[0].value.split(' '), options);
+        </script>
         <footer>
             <h class="footerLogo"> LyricSearch </h>
             <p class="credit">Developed by: Daming Gao, Matthew Whitehead   &#169 2018</p>
