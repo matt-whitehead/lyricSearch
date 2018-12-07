@@ -40,10 +40,9 @@
             <div class="error">{{"Did you mean..." +  modified_query + "?"}}</div>
         {% endif %}
         {% if title|length == 0 %}
-            <div class="error">{{"Search not found! Try to use other keywords."}}</div>
+            <div class="error">{{"No results found! Try using different keywords."}}</div>
         {% else %}
             <div id="statistics">
-                <h class="genreSelectorTitle"> Out of top 10 results: </h>
                 <br>
                 {% for genre, count in genre_counts.most_common() %}
                     <button class="genreSelector" id="{{genre}}" onclick="filter_genre(this.id)"> {{ genre + ": " + count|string}} </button>
