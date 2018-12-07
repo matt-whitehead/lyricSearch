@@ -7,9 +7,17 @@
         <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/normalize.css') }}">
         <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/customize.css') }}">
-        <script src={{ url_for('static', filename='js/mark.min.js') }}></script>
     </head>
     <body>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+        <script src={{ url_for('static', filename='js/mark.min.js') }}></script>
+
+
         <div class="form-group">
             <form action="search">
                 <a href="/" class="logo"> LyricSearch </a>
@@ -40,21 +48,35 @@
         {% if title|length == 0 %}
             <div class="error">{{"Search not found! Try to use other keywords."}}</div>
         {% else %}
-            <div>{{genre_counts}}</div>
+            <div id="statistics">
+                <h class="genreSelectorTitle"> Out of top 10 results: </h>
+                <br>
+                {% for genre, count in genre_counts.most_common() %}
+                    <button class="genreSelector" genre="{{ g }}"> {{ genre + ": " + count|string}} </button>
+                {% endfor %}
+            </div>
             {% for i in range(title|length) %}
                 <div class="wrapper">
                       <div class="title" id="panel">{{title[i]}}</div>
-                      <div class="score" id="panel">{{"Similarity Score: "}}</div>
                       <div class="artist" id="panel">{{"Artist: " + artist[i]}}</div>
-                      <div class="artist" id="panel">{{"Genre: " + genre[i]}}</div>
+                      <div class="genre" id="{{ genre[i] }}">{{"Genre: " + genre[i]}}</div>
                       <div class="lyrics" id="panel">{{lyrics[i]}}</div>
                 </div>
             {% endfor %}
         {% endif %}
         <script>
             let instance = new Mark(document.querySelector('body'));
-            let options = {'accuracy': 'partially', 'exclude': ['.title']}
+            let options = {'accuracy': 'partially', 'exclude': ['.title', '.artist', '.genre', '.genreSelector', '.genreSelectorTitle']}
             instance.mark(document.getElementsByClassName('searchBox')[0].value.split(' '), options);
+
+            $('.genreSelector').click(function() {
+                var genreSelected = $(this).attr('g');
+                console.log(genreSelected);
+                //$(".wrapper").not('#' + genreSelected).css({
+                    //"background-color" : "lightblue"
+                //})
+            })
+
         </script>
         <footer>
             <h class="footerLogo"> LyricSearch </h>

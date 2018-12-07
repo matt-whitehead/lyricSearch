@@ -52,7 +52,6 @@ def generate_result(query, search_type):
 
         # count up the genres of the results
         genre_counts = Counter(genre)
-
         return title, artist, lyrics, genre, genre_counts, modified_query
 
 
@@ -64,10 +63,20 @@ def root():
 @app.route("/search")
 def search():
     # collect and parse the query
-    q = request.args['q']
-    t = request.args['t']
+    q = request.args['q']  # query
+    t = request.args['t']  # type
+
     title, artist, lyrics, genre, genre_counts, modified_query = generate_result(q, t)
 
     return render_template("results.html", q=q, title=title,
                            artist=artist, lyrics=lyrics, genre=genre,
                            genre_counts=genre_counts, modified_query=modified_query, t=t)
+
+def filterByGenre():
+    g = request.args['g']  # genre
+
+    # if button clicked == genre
+    # call generate_result function to only search for these genreSelected
+    # then render_template 
+
+    return 0

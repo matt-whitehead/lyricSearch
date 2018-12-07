@@ -44,9 +44,22 @@
     font-style: italic;
 }
 .artist {
+    font-size: 20px;
     margin-left: 10px;
     font-family: "Arial Black", Gadget, sans-serif;
     text-decoration: underline;
+}
+
+.genre {
+    font-size: 20px;
+    margin-left: 10px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+#statistics {
+    margin-left: 35%;
+    margin-right: auto;
 }
 
 .lyrics {
@@ -106,4 +119,10 @@ footer {
     font-weight: bold;
     text-align: right !important;
     margin-right: 20px;
+}
+
+mark{
+    background-color: transparent !important;
+    color: #4169E1 !important;
+    font-weight: bold;
 }
