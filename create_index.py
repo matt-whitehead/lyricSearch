@@ -14,17 +14,15 @@ lyrics = lyrics[['lyrics', 'song', 'artist', 'genre']]
 lyrics.reset_index(drop=True, inplace=True)
 
 # clean the artist names and song names
-lyrics['artist'] = lyrics['artist'] \
-.apply(lambda x: ' '.join(x.split('-')).title())
+lyrics['artist'] = lyrics['artist'].apply(lambda x: x.replace('-', ' ').title())
 
-lyrics['song'] = lyrics['song'].astype('str') \
-.apply(lambda x: ' '.join(x.split('-')).title())
+lyrics['song'] = lyrics['song'].astype('str').apply(lambda x: x.replace('-', ' ').title())
 
 # we don't want people to think it's an error in our system
 lyrics['genre'].replace('Not Available', 'Unknown', inplace=True)
 
 # only index the first 10,000 documents for prototyping purposes
-lyrics_10000 = lyrics.iloc[:10000].copy()
+# lyrics_10000 = lyrics.iloc[:10000].copy()
 
 # define the schema
 schema = Schema(title=TEXT(stored=True, phrase=True),
@@ -35,6 +33,6 @@ schema = Schema(title=TEXT(stored=True, phrase=True),
 # create the index
 inv_index = create_in('index', schema)
 writer = inv_index.writer(limitmb=1000, procs=20)
-for row in lyrics_10000.itertuples():
+for row in lyrics.itertuples():
     writer.add_document(title=row[2], artist=row[3], lyrics=row[1], genre=row[4])
 writer.commit()
