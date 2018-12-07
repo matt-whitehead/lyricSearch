@@ -9,12 +9,6 @@
         <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/customize.css') }}">
     </head>
     <body>
-        <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-            crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-            crossorigin="anonymous"></script>
         <script src={{ url_for('static', filename='js/mark.min.js') }}></script>
 
 
@@ -39,7 +33,7 @@
                     {% endif %}
                 </select>
                 <input type="text" class="searchBox" name="q" value="{{q}}">
-                <input class="button" type="submit", value="Search">
+                <input class="button" type="submit" value="Search">
             </form>
         </div>
         {% if modified_query is not none %}
@@ -52,7 +46,7 @@
                 <h class="genreSelectorTitle"> Out of top 10 results: </h>
                 <br>
                 {% for genre, count in genre_counts.most_common() %}
-                    <button class="genreSelector" genre="{{ g }}"> {{ genre + ": " + count|string}} </button>
+                    <button class="genreSelector" id="{{genre}}" onclick="filter_genre(this.id)"> {{ genre + ": " + count|string}} </button>
                 {% endfor %}
             </div>
             {% for i in range(title|length) %}
@@ -66,17 +60,18 @@
         {% endif %}
         <script>
             let instance = new Mark(document.querySelector('body'));
-            let options = {'accuracy': 'partially', 'exclude': ['.title', '.artist', '.genre', '.genreSelector', '.genreSelectorTitle']}
+            let options = {'accuracy': 'partially', 'exclude': ['.title', '.artist', '.genre', '.genreSelector', '.genreSelectorTitle']};
             instance.mark(document.getElementsByClassName('searchBox')[0].value.split(' '), options);
-
-            $('.genreSelector').click(function() {
-                var genreSelected = $(this).attr('g');
-                console.log(genreSelected);
-                //$(".wrapper").not('#' + genreSelected).css({
-                    //"background-color" : "lightblue"
-                //})
-            })
-
+            function filter_genre(clicked_id){
+                let results = document.getElementsByClassName('genre');
+                for (i of results){
+                    if (i.id !== clicked_id){
+                        i.parentElement.style.display = 'none';
+                    } else if (i.id === clicked_id){
+                        i.parentElement.style.display = 'block';
+                    }
+                }
+            }
         </script>
         <footer>
             <h class="footerLogo"> LyricSearch </h>
