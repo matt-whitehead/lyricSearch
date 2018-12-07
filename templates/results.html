@@ -59,7 +59,7 @@
         {% endif %}
         <script>
             let instance = new Mark(document.querySelector('body'));
-            let options = {'accuracy': 'partially', 'exclude': ['.title', '.artist', '.genre', '.genreSelector', '.genreSelectorTitle']};
+            let options = {'accuracy': 'partially', 'exclude': ['.title', '.artist', '.genre', '.genreSelector', '.genreSelectorTitle', 'a']};
             instance.mark(document.getElementsByClassName('searchBox')[0].value.split(' '), options);
             function filter_genre(clicked_id){
                 let results = document.getElementsByClassName('genre');
